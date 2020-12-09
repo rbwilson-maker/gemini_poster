@@ -1,0 +1,298 @@
+% Gemini theme
+% https://github.com/anishathalye/gemini
+
+% ====================
+% Dependencies
+% ====================
+
+\RequirePackage{exscale}
+\RequirePackage{ragged2e}
+\RequirePackage{changepage}
+\RequirePackage{calc}
+\RequirePackage{fontspec}
+\RequirePackage[most]{tcolorbox}
+
+% ====================
+% Fonts
+% ====================
+
+\newfontfamily\Raleway[Ligatures=TeX]{Raleway}
+\newfontfamily\Lato[Ligatures=TeX]{Lato}
+\newfontfamily\Heebo[Ligatures=TeX]{Heebo}
+
+\usefonttheme{professionalfonts}
+
+\setsansfont{Heebo}[
+ UprightFont=*-Light,
+% ItalicFont=*-LightItalic,
+ BoldFont=*-Regular,
+% BoldItalicFont=*-Italic
+]
+
+%\setmathfont{Linux Libertine O}
+
+\setbeamerfont{headline}{family=\Heebo}
+\setbeamerfont{headline title}{size=\Huge,series=\bfseries}
+\setbeamerfont{headline author}{size=\Large}
+\setbeamerfont{headline institute}{size=\normalsize}
+\setbeamerfont{block title}{family=\Heebo,size=\Large,series=\bfseries}
+\setbeamerfont{heading}{family=\Heebo,series=\bfseries}
+\setbeamerfont{caption}{size=\small}
+\setbeamerfont{footline}{family=\Heebo,size=\normalsize}
+
+% ====================
+% Macros
+% ====================
+
+\newcommand{\samelineand}{\qquad}
+
+% ====================
+% Elements
+% ====================
+
+% List
+\makeatletter
+\def\@listi{\leftmargin\leftmarginii
+\topsep 1ex % spacing before
+\parsep 0\p@ \@plus\p@
+\itemsep 0.5ex} % spacing between
+\makeatother
+
+% Itemize
+
+\setbeamertemplate{itemize item}{\raise0.5ex \hbox{\vrule width 0.5ex height 0.5ex}}
+\setbeamertemplate{itemize subitem}{\raise0.3ex \hbox{\vrule width 0.5ex height 0.5ex}}
+\setbeamertemplate{itemize subsubitem}{\raise0.2ex \hbox{\vrule width 0.5ex height 0.5ex}}
+
+% Enumerate
+
+\setbeamertemplate{enumerate item}{\insertenumlabel.}
+\setbeamertemplate{enumerate subitem}{\insertsubenumlabel.}
+\setbeamertemplate{enumerate subsubitem}{\insertsubsubenumlabel.}
+
+% Equation
+\setlength\belowdisplayshortskip{2ex}
+
+% Caption
+\setbeamertemplate{caption}[numbered]
+\setbeamertemplate{caption label separator}[period]
+\setlength{\abovecaptionskip}{2ex}
+\setlength{\belowcaptionskip}{1ex}
+
+% Bibliography
+\setbeamertemplate{bibliography item}[text]
+
+% Navigation
+\beamertemplatenavigationsymbolsempty
+
+% ====================
+% Components
+% ====================
+
+% Heading
+\newcommand\heading[1]
+{%
+  \par\bigskip
+  {\usebeamerfont{heading}\usebeamercolor[fg]{heading}#1}\par\smallskip
+}
+
+% logo
+\newlength{\logoleftwidth}
+\setlength{\logoleftwidth}{0cm}
+\newlength{\logorightwidth}
+\setlength{\logorightwidth}{0cm}
+\newlength{\maxlogowidth}  % space on both sides set to maxlogowidth to keep title centered
+\setlength{\maxlogowidth}{0cm}
+
+\newcommand{\logoright}[1]{
+  \newcommand{\insertlogoright}{#1}
+  \settowidth{\logorightwidth}{\insertlogoright}
+  \addtolength{\logorightwidth}{10ex}
+  \setlength{\maxlogowidth}{\maxof{\logoleftwidth}{\logorightwidth}}
+}
+\newcommand{\logoleft}[1]{
+  \newcommand{\insertlogoleft}{#1}
+  \settowidth{\logoleftwidth}{\insertlogoleft}
+  \addtolength{\logoleftwidth}{10ex}
+  \setlength{\maxlogowidth}{\maxof{\logoleftwidth}{\logorightwidth}}
+}
+
+% Headline
+\setbeamertemplate{headline}
+{
+  \begin{beamercolorbox}{headline}
+    \begin{columns}
+      \begin{column}{\maxlogowidth}
+        \vskip5ex
+        \ifdefined\insertlogoleft
+        \vspace*{\fill}
+        \hspace{10ex}
+        \raggedright
+        \insertlogoleft
+        \vspace*{\fill}
+        \else\fi
+      \end{column}
+      \begin{column}{\dimexpr\paperwidth-\maxlogowidth-\maxlogowidth}
+        \usebeamerfont{headline}
+        \vskip3ex
+        \centering
+        {\usebeamerfont{headline title}\usebeamercolor[fg]{headline title}\inserttitle\\[0.5ex]}
+        {\usebeamerfont{headline author}\usebeamercolor[fg]{headline author}\insertauthor\\[1ex]}
+        {\usebeamerfont{headline institute}\usebeamercolor[fg]{headline institute}\insertinstitute\\[1ex]}
+      \end{column}
+      \begin{column}{\maxlogowidth}
+        \vskip5ex
+        \ifdefined\insertlogoright
+        \vspace*{\fill}
+        \raggedleft
+        \insertlogoright
+        \hspace{10ex}
+        \vspace*{\fill}
+        \else\fi
+      \end{column}
+    \end{columns}
+    \vspace{5ex}
+    \ifbeamercolorempty[bg]{headline rule}{}{
+      \begin{beamercolorbox}[wd=\paperwidth,colsep=0.5ex]{headline rule}\end{beamercolorbox}
+    }
+  \end{beamercolorbox}
+}
+
+%% tcolorbox definitions
+
+\newtcolorbox{mybox}[2][]{%
+    code={%
+        \usebeamercolor{block title}
+        \colorlet{titlebg}{block title.bg}
+        \colorlet{titlefg}{block title.fg}
+        \usebeamercolor{block body}
+        \colorlet{bodybg}{block body.bg}
+        \colorlet{bodyfg}{block body.fg}
+    },
+    colback=bodybg,
+    colupper=bodyfg,
+    colframe=titlefg,
+    boxsep=5mm,
+    fonttitle=\bfseries,
+    coltitle=titlefg,
+    colbacktitle=titlebg,
+    enhanced,
+    attach boxed title to top left={yshift=-13mm, xshift=-12mm},
+    boxed title style = {colframe=white, boxsep=6mm},
+    title=#2,
+    #1}
+
+\newtcolorbox{myalertedbox}[2][]{%
+    code={%
+        \usebeamercolor{block alerted title}
+        \colorlet{titlebg}{block alerted title.bg}
+        \colorlet{titlefg}{block alerted title.fg}
+        \usebeamercolor{block alerted body}
+        \colorlet{bodybg}{block alerted body.bg}
+        \colorlet{bodyfg}{block alerted body.fg}
+    },
+    colback=bodybg, 
+    colupper=bodyfg,
+    colframe=titlefg,
+    boxsep=5mm,
+    fonttitle=\bfseries,
+    coltitle=titlefg, 
+    colbacktitle=titlebg,
+    enhanced,
+    attach boxed title to top left={yshift=-13mm, xshift=-12mm},
+    boxed title style = {colframe=white, boxsep=6mm},
+    title=#2,
+    #1}
+
+\newtcolorbox{myexamplebox}[2][]{%
+    code={%
+        \usebeamercolor{block example title}
+        \colorlet{titlebg}{block example title.bg}
+        \colorlet{titlefg}{block example title.fg}
+        \usebeamercolor{block example body}
+        \colorlet{bodybg}{block example body.bg}
+        \colorlet{bodyfg}{block example body.fg}
+    },
+    colback=bodybg, 
+    colupper=bodyfg,
+    colframe=white,
+    boxsep=5mm,
+    fonttitle=\bfseries,
+    coltitle=titlefg, 
+    colbacktitle=titlebg,
+    enhanced,
+    attach boxed title to top left={yshift=-13mm, xshift=-12mm},
+    boxed title style = {colframe=white, boxsep=6mm},
+    title=#2,
+    #1}
+
+%% end tcolorbox definitions
+
+% Block
+\setbeamertemplate{block begin}
+{
+  \begin{mybox}{\usebeamerfont{block title}\insertblocktitle}
+  {\parskip0pt\par}
+  \usebeamerfont{block body}
+    \vskip8mm
+  \justifying
+  \setlength{\parskip}{1ex}
+}
+\setbeamertemplate{block end}
+{
+   \end{mybox}
+   \vskip0pt
+   \vspace*{1ex}
+}
+
+% Alert Block
+\setbeamertemplate{block alerted begin}
+{
+  \begin{myalertedbox}{\usebeamerfont{block title}\insertblocktitle}
+  {\parskip0pt\par}
+  \usebeamerfont{block alerted body}
+    \vskip8mm
+  \justifying
+  \setlength{\parskip}{1ex}
+}
+
+\setbeamertemplate{block alerted end}
+{
+  \end{myalertedbox}
+}
+
+% Example Block
+\setbeamertemplate{block example begin}
+{
+  \begin{myexamplebox}{\usebeamerfont{block title}\insertblocktitle}
+  {\parskip0pt\par}
+  \usebeamerfont{block example body}
+    \vskip8mm
+  \justifying
+  \setlength{\parskip}{1ex}
+}
+
+\setbeamertemplate{block example end}
+{
+  \end{myexamplebox}
+}
+
+% Footer
+\newcommand{\footercontent}[1]{\newcommand{\insertfootercontent}{#1}}
+
+\setbeamertemplate{footline}{
+  \ifdefined\insertfootercontent
+  \begin{beamercolorbox}[vmode]{headline}
+    \ifbeamercolorempty[bg]{headline rule}{}{
+      \begin{beamercolorbox}[wd=\paperwidth,colsep=0.25ex]{headline rule}\end{beamercolorbox}
+    }
+    \vspace{1.5ex}
+    \hspace{\sepwidth}
+    \usebeamerfont{footline}
+    \centering
+    \insertfootercontent
+    \hspace{\sepwidth}
+    \vspace{1.5ex}
+  \end{beamercolorbox}
+  \else\fi
+}

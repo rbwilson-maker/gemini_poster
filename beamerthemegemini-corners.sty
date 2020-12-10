@@ -25,20 +25,34 @@
 \setsansfont{Heebo}[
  UprightFont=*-Light,
 % ItalicFont=*-LightItalic,
- BoldFont=*-Regular,
+ BoldFont=*-Medium,
 % BoldItalicFont=*-Italic
 ]
-
-%\setmathfont{Linux Libertine O}
 
 \setbeamerfont{headline}{family=\Heebo}
 \setbeamerfont{headline title}{size=\Huge,series=\bfseries}
 \setbeamerfont{headline author}{size=\Large}
-\setbeamerfont{headline institute}{size=\normalsize}
+\setbeamerfont{headline institute}{size=\large}
 \setbeamerfont{block title}{family=\Heebo,size=\Large,series=\bfseries}
 \setbeamerfont{heading}{family=\Heebo,series=\bfseries}
 \setbeamerfont{caption}{size=\small}
 \setbeamerfont{footline}{family=\Heebo,size=\normalsize}
+
+%% Disable beamer-style theorem boxes.
+\setbeamertemplate{theorem begin}{{
+%\inserttheoremheadfont
+{\bfseries\usebeamercolor[fg]{heading}\inserttheoremname
+\inserttheoremnumber
+\ifx\inserttheoremaddition\@empty\else\ (\inserttheoremaddition)\fi%
+\inserttheorempunctuation}
+}}
+
+\setbeamertemplate{theorem end}{}
+
+% References all on one line.
+\setbeamertemplate{bibliography entry title}{}
+\setbeamertemplate{bibliography entry location}{}
+\setbeamertemplate{bibliography entry note}{}
 
 % ====================
 % Macros
@@ -241,8 +255,7 @@
 \setbeamertemplate{block end}
 {
    \end{mybox}
-   \vskip0pt
-   \vspace*{1ex}
+   \vspace{8mm}
 }
 
 % Alert Block
@@ -259,6 +272,7 @@
 \setbeamertemplate{block alerted end}
 {
   \end{myalertedbox}
+  \vspace{8mm}
 }
 
 % Example Block
@@ -275,6 +289,7 @@
 \setbeamertemplate{block example end}
 {
   \end{myexamplebox}
+  \vspace{8mm}
 }
 
 % Footer

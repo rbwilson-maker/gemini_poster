@@ -6,7 +6,7 @@
 % ====================
 % Packages
 % ====================
-
+\usepackage{fontspec}
 \usepackage[T1]{fontenc}
 \usepackage{lmodern}
 \usepackage[size=custom,width=120,height=72,scale=1.0]{beamerposter}
@@ -15,7 +15,10 @@
 \usepackage{graphicx}
 \usepackage{booktabs}
 \usepackage{tikz}
+\usetikzlibrary{arrows.meta}
 \usepackage{pgfplots}
+\usepackage{multicol}
+\setlength{\columnseprule}{1pt}
 
 % ====================
 % Lengths
@@ -34,20 +37,20 @@
 % Title
 % ====================
 
-\title{Some fancy title: followed by some more text}
+\title{Starvation Freedom in Multi-hop Network Topologies}
 
-\author{Alyssa P. Hacker \inst{1} \and Ben Bitdiddle \inst{2} \and Lem E. Tweakit \inst{2}}
+\author{Rachel Wilson \inst{1} \and Pratiksha Thaker \inst{1} \and Justine Sherry \inst{1}}
 
-\institute[shortinst]{\inst{1} Some Institute \samelineand \inst{2} Another Institute}
+\institute[shortinst]{\inst{1} Carnegie Mellon University}
 
 % ====================
 % Footer (optional)
 % ====================
 
 \footercontent{
-  \href{https://www.example.com}{https://www.example.com} \hfill
-  ABC Conference 2025, New York --- XYZ-1234 \hfill
-  \href{mailto:alyssa.p.hacker@example.com}{alyssa.p.hacker@example.com}}
+  \href{mailto:rbwilson@andrew.cmu.edu}{rbwilson@andrew.cmu.edu} \hfill
+  Meeting of the Minds, Pittsburgh --- Carnegie Mellon University \hfill
+  Spring 2023}
 % (can be left out to remove footer)
 
 % ====================
@@ -70,146 +73,66 @@
 
 \begin{column}{\colwidth}
 
-  \begin{block}{A block title}
+  \begin{alertblock}{Summary}
 
-    Some block contents, followed by a diagram, followed by a dummy paragraph.
+    Congestion control often uses game theory to model senders 
+    competing for bandwidth in a network.
+    
+    In this context, prior work was able to bound conditions for bandwidth 
+    starvation when senders optimize different utility functions 
+    in a network with a single link.
 
-    \begin{figure}
-      \centering
-      \begin{tikzpicture}[scale=6]
-        \draw[step=0.25cm,color=gray] (-1,-1) grid (1,1);
-        \draw (1,0) -- (0.2,0.2) -- (0,1) -- (-0.2,0.2) -- (-1,0)
-          -- (-0.2,-0.2) -- (0,-1) -- (0.2,-0.2) -- cycle;
-      \end{tikzpicture}
-      \caption{A figure caption.}
-    \end{figure}
-
-    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi ultricies
-    eget libero ac ullamcorper. Integer et euismod ante. Aenean vestibulum
-    lobortis augue, ut lobortis turpis rhoncus sed. Proin feugiat nibh a
-    lacinia dignissim. Proin scelerisque, risus eget tempor fermentum, ex
-    turpis condimentum urna, quis malesuada sapien arcu eu purus.
-
-  \end{block}
-
-  \begin{block}{A block containing a list}
-
-    Nam vulputate nunc felis, non condimentum lacus porta ultrices. Nullam sed
-    sagittis metus. Etiam consectetur gravida urna quis suscipit.
-
-    \begin{itemize}
-      \item \textbf{Mauris tempor} risus nulla, sed ornare
-      \item \textbf{Libero tincidunt} a duis congue vitae
-      \item \textbf{Dui ac pretium} morbi justo neque, ullamcorper
-    \end{itemize}
-
-    Eget augue porta, bibendum venenatis tortor.
-
-  \end{block}
-
-  \begin{alertblock}{A highlighted block}
-
-    This block catches your eye, so \textbf{important stuff} should probably go
-    here.
-
-    Curabitur eu libero vehicula, cursus est fringilla, luctus est. Morbi
-    consectetur mauris quam, at finibus elit auctor ac. Aliquam erat volutpat.
-    Aenean at nisl ut ex ullamcorper eleifend et eu augue. Aenean quis velit
-    tristique odio convallis ultrices a ac odio.
-
-    \begin{itemize}
-      \item \textbf{Fusce dapibus tellus} vel tellus semper finibus. In
-        consequat, nibh sed mattis luctus, augue diam fermentum lectus.
-      \item \textbf{In euismod erat metus} non ex. Vestibulum luctus augue in
-        mi condimentum, at sollicitudin lorem viverra.
-      \item \textbf{Suspendisse vulputate} mauris vel placerat consectetur.
-        Mauris semper, purus ac hendrerit molestie, elit mi dignissim odio, in
-        suscipit felis sapien vel ex.
-    \end{itemize}
-
+    \textbf{This project expands that result to networks with multiple links. 
+    In order to describe the utility function in these networks, 
+    we model delay both deterministically and with M/M/1 queues.}
   \end{alertblock}
 
-\end{column}
-
-\separatorcolumn
-
-\begin{column}{\colwidth}
-
-  \begin{exampleblock}{A block containing an enumerated list}
-
-    Vivamus congue volutpat elit non semper. Praesent molestie nec erat ac
-    interdum. In quis suscipit erat. \textbf{Phasellus mauris felis, molestie
-    ac pharetra quis}, tempus nec ante. Donec finibus ante vel purus mollis
-    fermentum. Sed felis mi, pharetra eget nibh a, feugiat eleifend dolor. 
-
-    \begin{enumerate}
-      \item \textbf{Morbi mauris purus}, egestas at vehicula et, convallis
-        accumsan orci. Orci varius natoque penatibus et magnis dis parturient
-        montes, nascetur ridiculus mus.
-      \item \textbf{Cras vehicula blandit urna ut maximus}. Aliquam blandit nec
-        massa ac sollicitudin. Curabitur cursus, metus nec imperdiet bibendum,
-        velit lectus faucibus dolor, quis gravida metus mauris gravida turpis.
-      \item \textbf{Vestibulum et massa diam}. Phasellus fermentum augue non
-        nulla accumsan, non rhoncus lectus condimentum.
-    \end{enumerate}
-
-  \end{exampleblock}
-  \vspace{-10mm}
-
-  \begin{block}{Fusce aliquam magna velit}
-
-    Et rutrum ex euismod vel. Pellentesque ultricies, velit in fermentum
-    vestibulum, lectus nisi pretium nibh, sit amet aliquam lectus augue vel
-    velit. Suspendisse rhoncus massa porttitor augue feugiat molestie. Sed
-    molestie ut orci nec malesuada. Sed ultricies feugiat est fringilla
-    posuere.
-
+  \begin{block}{The Congestion Control Game}
+    Senders compete for bandwith on links with given capacities, choosing a rate each round.
     \begin{figure}
       \centering
       \begin{tikzpicture}
-        \begin{axis}[
-            scale only axis,
-            no markers,
-            domain=0:2*pi,
-            samples=100,
-            axis lines=center,
-            axis line style={-},
-            ticks=none]
-          \addplot[red] {sin(deg(x))};
-          \addplot[blue] {cos(deg(x))};
-        \end{axis}
-      \end{tikzpicture}
-      \caption{Another figure caption.}
+        \node [circle,draw,thick,scale=2] (link1) at (6,4) {$c_1$};
+        \node [circle,draw,thick,scale=2] (link2) at (14,4) {$c_2$};
+        \node [circle,draw,thick,scale=2] (linkn) at (25,4) {$c_n$};
+        \node [scale=2] (s1) at (0,6) {$s_1$};
+        \node [scale=2] at (0,4) {$\vdots$};
+        \node [scale=2] (sn) at (0,2) {$s_i$};
+        \node [scale=2] (dots) at (20,4) {$\cdots$};
+        \node [scale=2] (sn1) at (10,8) {$s_{i+1}$};
+        \node [scale=2] (sn2) at (21,8) {$s_{k}$};
+        \draw[-{Stealth[length=6mm,width=4mm]},semithick] (s1.east) -- (link1.west);
+        \draw[-{Stealth[length=6mm,width=4mm]},semithick] (sn.east) -- (link1.west);
+        \draw[-{Stealth[length=6mm,width=4mm]},semithick] (link1.east) -- (link2.west);
+        \draw[-{Stealth[length=6mm,width=4mm]},semithick] (link2.east) -- (dots.west);
+        \draw[-{Stealth[length=6mm,width=4mm]},semithick] (dots.east) -- (linkn.west);
+        \draw[-{Stealth[length=6mm,width=4mm]},semithick] (linkn.east) -- (28,4);
+        \draw[-{Stealth[length=6mm,width=4mm]},semithick] (sn1.south) -- (link2.west);
+        \draw[-{Stealth[length=6mm,width=4mm]},semithick] (sn2.south) -- (linkn.west);
+        \end{tikzpicture}
+      \caption{Multi-hop Network with Multiple Senders}
     \end{figure}
 
+    \heading{The Utility Function}
+    Each sender is rewarded for throughput, determined by $T$, and penalized for
+     delay, given by $D$, which is scaled by a delay sensitivity parameter $\alpha$.
+    
+    {\Large\[u_i(s_i, Q) = T(s_i, Q) - \alpha_i s_i D(s_i, Q) \]}
+
+    Sender $i$ optimizes $u_i$ as a function of its sending rate $s_i$ and the
+    aggregate \textit{load} $Q$.
   \end{block}
 
-  \begin{block}{Nam cursus consequat egestas}
-
-    Nulla eget sem quam. Ut aliquam volutpat nisi vestibulum convallis. Nunc a
-    lectus et eros facilisis hendrerit eu non urna. Interdum et malesuada fames
-    ac ante \textbf{ipsum primis} in faucibus. Etiam sit amet velit eget sem
-    euismod tristique. Praesent enim erat, porta vel mattis sed, pharetra sed
-    ipsum. Morbi commodo condimentum massa, \textbf{tempus venenatis} massa
-    hendrerit quis. 
-
-    \begin{itemize}
-      \item \textbf{Sed consequat} id ante vel efficitur. Praesent congue massa
-        sed est scelerisque, elementum mollis augue iaculis.
-        \begin{itemize}
-          \item In sed est finibus, vulputate
-            nunc gravida, pulvinar lorem. In maximus nunc dolor, sed auctor eros
-            porttitor quis.
-          \item Fusce ornare dignissim nisi. Nam sit amet risus vel lacus
-            tempor tincidunt eu a arcu.
-          \item Donec rhoncus vestibulum erat, quis aliquam leo
-            gravida egestas.
-        \end{itemize}
-      \item \textbf{Sed luctus, elit sit amet} dictum maximus, diam dolor
-        faucibus purus, sed lobortis justo erat id turpis.
-      \item \textbf{Pellentesque facilisis dolor in leo} bibendum congue.
-        Maecenas congue finibus justo, vitae eleifend urna facilisis at.
-    \end{itemize}
+  \begin{block}{Goal}
+    \begin{Large}
+      \begin{center}
+        \textbf{How do we model delay in networks with multiple links?}
+        \begin{enumerate}
+          \item Deterministically
+          \item Using Poisson processes
+        \end{enumerate}
+      \end{center}
+    \end{Large}
 
   \end{block}
 
@@ -219,67 +142,95 @@
 
 \begin{column}{\colwidth}
 
-  \begin{block}{A block containing some math}
+  \begin{block}{Deterministic Delay across Multiple Links}
+    \begin{figure}
+      \centering
+      \begin{tikzpicture}
+        \node [circle,draw,thick,scale=2] (link1) at (6,4) {$c_1$};
+        \node [circle,draw,thick,scale=2] (link2) at (11,4) {$c_2$};
+        \node [circle,draw,thick,scale=2] (linkk) at (21,4) {$c_n$};
+        \node [scale=2] (s1) at (0,4) {$s_0$};
+        \node [scale=2] (dots) at (16,4) {$\cdots$};
+        \draw[-{Stealth[length=6mm,width=4mm]},semithick] (s1.east) -- (link1.west);
+        \draw[-{Stealth[length=6mm,width=4mm]},semithick] (link1.east) -- (link2.west);
+        \draw[-{Stealth[length=6mm,width=4mm]},semithick] (link2.east) -- (dots.west);
+        \draw[-{Stealth[length=6mm,width=4mm]},semithick] (dots.east) -- (linkk.west);
+        \draw[-{Stealth[length=6mm,width=4mm]},semithick] (linkk.east) -- (25,4);
+        \end{tikzpicture}
+      \caption{One sender into an arbitrarily long sequence of links.}
+    \end{figure}
+      
+    \begin{center}
+      \begin{tabular}{| c | l |}
+        \hline
+        $p$ & \# of packets\\
+        \hline
+        $b$ & \# of bits per packet\\
+        \hline
+        $c_i$ & capacity of link $i$\\
+        \hline
+      \end{tabular} \ \ \ \
+      \begin{tabular}{| c | l |}
+        \hline
+        $c_\mathrm{min}$ & smallest of all link capacities\\
+        \hline
+        $w_i$ & idle time per packet on link $i$\\
+        \hline
+        $s_0$ & initial pace set by the sender\\
+        \hline
+      \end{tabular}
+    \end{center}
+    
+    {\large
+    \[\textbf{end-to-end time for $p$ packets} = \frac{pb}{c_\mathrm{min}} + \sum_{i\neq \mathrm{min}}^{n}\frac{b}{c_i}\]}\\
+    First term: Time per packet on the slowest link\\
+    Second term: Time it takes the first packet to traverse all links
+  \end{block}
+  \begin{exampleblock}{Proof Sketch}
+      \includegraphics[scale=2]{Cases.png}
+  
+    {\Large Between two arbitrary links, we observe how packet spacing changes.
+    \begin{itemize}
+      \item \textbf{Case 1:} $\frac{b}{c_{i-1}} + w_{i-1} \geq \frac{b}{c_{i}} \to$ 
+      Packet spacing does not change.
+      \item \textbf{Case 2:} $\frac{b}{c_{i-1}} + w_{i-1} < \frac{b}{c_{i}} \to$ 
+      Packet spacing increases to $\frac{b}{c_i}$.
+    \end{itemize}}
 
-    Nullam non est elit. In eu ornare justo. Maecenas porttitor sodales lacus,
-    ut cursus augue sodales ac.
+    {\Large\textbf{The slowest link determines overall packet spacing.}}
+  \end{exampleblock}
+  \vspace{-10mm}
 
-    $$
-    \int_{-\infty}^{\infty} e^{-x^2}\,dx = \sqrt{\pi}
-    $$
+  
+\end{column}
 
-    Interdum et malesuada fames $\{1, 4, 9, \ldots\}$ ac ante ipsum primis in
-    faucibus. Cras eleifend dolor eu nulla suscipit suscipit. Sed lobortis non
-    felis id vulputate.
+\separatorcolumn
 
-    \heading{A heading inside a block}
+\begin{column}{\colwidth}
 
-    Praesent consectetur mi $x^2 + y^2$ metus, nec vestibulum justo viverra
-    nec. Proin eget nulla pretium, egestas magna aliquam, mollis neque. Vivamus
-    dictum $\mathbf{u}^\intercal\mathbf{v}$ sagittis odio, vel porta erat
-    congue sed. Maecenas ut dolor quis arcu auctor porttitor.
+  \begin{block}{Concern}
+   
+    When multiple senders enter the network, it is hard to reason about the
+    interleaving of packets deterministically. Instead we use Poisson processes.
+    
+  \end{block}
 
-    \heading{Another heading inside a block}
+  \begin{block}{Delay using Poisson Process across Multiple Links}
 
-    Sed augue erat, scelerisque a purus ultricies, placerat porttitor neque.
-    Donec $P(y \mid x)$ fermentum consectetur $\nabla_x P(y \mid x)$ sapien
-    sagittis egestas. Duis eget leo euismod nunc viverra imperdiet nec id
-    justo.
+
+    DIAGRAM
+
+    cool easy math
 
   \end{block}
 
-  \begin{block}{Nullam vel erat at velit convallis laoreet}
+  \begin{exampleblock}{Considerations}
+    Is this realistic???
+  \end{exampleblock}
+  \vspace{-10mm}
 
-    Class aptent taciti sociosqu ad litora torquent per conubia nostra, per
-    inceptos himenaeos. Phasellus libero enim, gravida sed erat sit amet,
-    scelerisque congue diam. Fusce dapibus dui ut augue pulvinar iaculis.
-
-    \begin{table}
-      \centering
-      \begin{tabular}{l r r c}
-        \toprule
-        \textbf{First column} & \textbf{Second column} & \textbf{Third column} & \textbf{Fourth} \\
-        \midrule
-        Foo & 13.37 & 384,394 & $\alpha$ \\
-        Bar & 2.17 & 1,392 & $\beta$ \\
-        Baz & 3.14 & 83,742 & $\delta$ \\
-        Qux & 7.59 & 974 & $\gamma$ \\
-        \bottomrule
-      \end{tabular}
-      \caption{A table caption.}
-    \end{table}
-
-    Donec quis posuere ligula. Nunc feugiat elit a mi malesuada consequat. Sed
-    imperdiet augue ac nibh aliquet tristique. Aenean eu tortor vulputate,
-    eleifend lorem in, dictum urna. Proin auctor ante in augue tincidunt
-    tempor. 
-
-    Nulla varius finibus volutpat. Mauris molestie lorem tincidunt, iaculis
-    libero at, gravida ante. Phasellus at felis eu neque suscipit suscipit.
-    Integer ullamcorper, dui nec pretium ornare, urna dolor consequat libero,
-    in feugiat elit lorem euismod lacus. Pellentesque sit amet dolor mollis,
-    auctor urna non, tempus sem.
-
+  \begin{block}{Moving Forward}
+    Using this to actually bound starvation
   \end{block}
 
   \begin{block}{References}

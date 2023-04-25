@@ -88,7 +88,7 @@
   \end{alertblock}
 
   \begin{block}{The Congestion Control Game}
-    Senders compete for bandwith on links with given capacities, choosing a rate each round.
+    Senders compete for bandwith on links with given capacities.
     \begin{figure}
       \centering
       \begin{tikzpicture}
@@ -114,24 +114,23 @@
     \end{figure}
 
     \heading{The Utility Function}
-    Each sender is rewarded for throughput, determined by $T$, and penalized for
-     delay, given by $D$, which is scaled by a delay sensitivity parameter $\alpha$.
+    Sender $i$ optimizes $u_i$ as a function of its sending rate $s_i$ and the
+    aggregate load $Q$
     
     {\Large\[u_i(s_i, Q) = T(s_i, Q) - \alpha_i s_i D(s_i, Q) \]}
 
-    Sender $i$ optimizes $u_i$ as a function of its sending rate $s_i$ and the
-    aggregate \textit{load} $Q$.
+    Each sender is rewarded for throughput, determined by $T$, and penalized for
+     delay, given by $D$, which is scaled by a delay sensitivity parameter $\alpha$.
   \end{block}
 
   \begin{block}{Goal}
     \begin{Large}
-      \begin{center}
-        \textbf{How do we model delay in networks with multiple links?}
-        \begin{enumerate}
-          \item Deterministically
-          \item Using Poisson processes
-        \end{enumerate}
-      \end{center}
+      
+      \textbf{To model delay in multi-hop networks in two ways.}
+      \begin{enumerate}
+        \item Reasoning deterministically for a single sender
+        \item Using Poisson processes for arbitrary senders
+      \end{enumerate}
     \end{Large}
 
   \end{block}
@@ -142,7 +141,7 @@
 
 \begin{column}{\colwidth}
 
-  \begin{block}{Deterministic Delay across Multiple Links}
+  \begin{block}{Deterministic Delay with One Sender across Multiple Links}
     \begin{figure}
       \centering
       \begin{tikzpicture}
@@ -208,29 +207,59 @@
 
 \begin{column}{\colwidth}
 
-  \begin{block}{Concern}
+  \begin{block}{Deterministic Drawback}
    
-    When multiple senders enter the network, it is hard to reason about the
-    interleaving of packets deterministically. Instead we use Poisson processes.
+    When multiple senders enter the network, it is hard to reason deterministically 
+    about the interleaving of packets from different senders. 
+    Instead we use Poisson processes.
     
   \end{block}
 
-  \begin{block}{Delay using Poisson Process across Multiple Links}
+  \begin{block}{Delay using Poisson Processes across Multiple Links}
+    \begin{figure}
+      \centering
+      \begin{tikzpicture}
+        \node [circle,draw,thick,scale=2] (link1) at (6,2) {$c_1$};
+        \node [circle,draw,thick,scale=2] (link2) at (14,2) {$c_2$};
+        \node [scale=2] (s1) at (0,4) {$s_1$};
+        \node [scale=2] (s3) at (10,5) {$s_{3}$};
+        \node [scale=2] (s2) at (0,0) {$s_{2}$};
+        \draw[-{Stealth[length=6mm,width=4mm]},semithick] (s1.east) -- (link1.west);
+        \draw[-{Stealth[length=6mm,width=4mm]},semithick] (s2.east) -- (link1.west);
+        \draw[-{Stealth[length=6mm,width=4mm]},semithick] (link1.east) -- (link2.west);
+        \draw[-{Stealth[length=6mm,width=4mm]},semithick] (link2.east) -- (18,2);
+        \draw[-{Stealth[length=6mm,width=4mm]},semithick] (s3.south) -- (link2.west);
+      \end{tikzpicture}
+      \caption{A simple network with multiple senders.}
+    \end{figure}
 
+    \heading{Poisson Process}
+    Sending rates $s_i$ and service rates $c_i$ are random and memoryless, as are
+    departures from any link[CITE Mor].
 
-    DIAGRAM
+    Merge two Poisson processes by adding their sending rates.
 
-    cool easy math
-
+    \heading{Average Delay}
+    $T_{s_i}$ is the average time a packet from $s_i$ spends in the Network[CITE Mor]
+    {\large\begin{align*}
+      \mathbb{E}[T_{s_1}] = \mathbb{E}[T_{s_2}] &= \frac{1}{c_1 - (s_1+s_2)} + \frac{1}{c_2 - (s_1 + s_2+s_3)}\\
+      \mathbb{E}[T_{s_3}] &= \frac{1}{c_2 - (s_1 + s_2+s_3)}
+    \end{align*}}
   \end{block}
 
   \begin{exampleblock}{Considerations}
-    Is this realistic???
+    \begin{itemize}
+      \item Is a Poisson model realistic?
+      \item Can we make the delay aggregative with an upper bound?
+      \item How can we circumvent the stability requirement for the Poisson model?
+    \end{itemize}
   \end{exampleblock}
   \vspace{-10mm}
 
   \begin{block}{Moving Forward}
-    Using this to actually bound starvation
+    After calculating delay, we need to make the game aggregative and revisit
+    premises involving concavity in order to apply prior results
+    which bound starvation.
   \end{block}
 
   \begin{block}{References}
